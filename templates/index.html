@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <link href="https://fonts.googleapis.com/css?family=Lobster" rel="stylesheet">
+  <title>🎨 Art Inspiration</title>
+  <style>
+    body {
+      font-family: 'Times New Roman', Times, serif;
+      background-color: #fff4e1;
+      text-align: center;
+      padding: 1.3rem;
+    }
+  
+    h1 {
+      font-family: 'Lobster', cursive;
+      font-size: 3.5rem;
+      margin-bottom: 1.5rem;
+    }
+  
+    h2 {
+      font-size: 1.8rem;
+      margin-top: 1.5rem;
+      font-weight: bold;
+    }
+  
+    select, button {
+      font-size: 1.2rem;
+      padding: 0.5rem 1rem;
+      margin: 0.5rem;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      font-family: 'Times New Roman', Times, serif;
+    }
+  
+    button {
+      background-color: #ffd369;
+      border: none;
+      cursor: pointer;
+      font-weight: 600;
+    }
+  
+    button:hover {
+      background-color: #ffb347;
+    }
+  
+    img {
+      max-width: 90%;
+      height: auto;
+      margin-top: 1.5rem;
+      border-radius: 10px;
+      box-shadow: 0 0 15px rgba(0,0,0,0.25);
+    }
+  
+    p {
+      font-family: 'Times New Roman', Times, serif;
+      font-size: 1rem;
+    }
+  </style>
+</head>
+<body>
+  <h1>🎨 ArtInspo 🎨</h1>
+  <p style="font-size: 1.1rem; margin-bottom: 1rem; max-width: 600px; margin-left: auto; margin-right: auto; line-height: 1.4;">
+    Love creating art, but have a hard time finding inspiration? Select a category from the dropdown below and click <strong>Inspire Me!</strong> to get a random image (sourced from Pexels.com) for your next art project.
+  </p>  
+  <form method="POST">
+    <select name="category" id="category" required>
+        <option value="" disabled selected>Choose a category🤔</option>
+        {% for key, value in categories.items() %}
+          <option value="{{ key }}">{{ value.capitalize() }}</option>
+        {% endfor %}
+        <option value="10">Random</option>
+      </select>
+    <button type="submit">Inspire Me!</button>
+  </form>
+
+  {% if image_url %}
+    <h2>Category: {{ selected_category.capitalize() }}</h2>
+    {% if photographer %}
+      <p><em>Photo by {{ photographer }} via Pexels</em></p>
+    {% endif %}
+    <img src="{{ image_url }}" alt="Art Inspiration Image">
+  {% endif %}
+</body>
+</html>
